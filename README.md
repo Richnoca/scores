@@ -2,5 +2,5 @@ This is a widget that allows you to see up to date and minute by minute scores f
 
 it includes a refresh button and all matchups and status of games.
 
-Test to update
+Test again to update
 
