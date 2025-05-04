@@ -15,11 +15,11 @@ def fetch_scores():
     finished = []
 
     for game in games:
-        competitions = game.get("competitions", [])
-        if not competitions:
+        sets = game.get("sets", [])
+        if not sets:
             continue
 
-        comp = competitions[0]
+        comp = sets[0]
         competitors = comp.get("competitors", [])
         status = game.get("status", {}).get("type", {}).get("shortDetail", "")
 
