@@ -2,8 +2,6 @@ import requests
 import tkinter as tk
 from tkinter import ttk
 
-// this is a comment to test github uploads
-
 def fetch_scores():
     url = "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard"
     response = requests.get(url)
@@ -13,14 +11,15 @@ def fetch_scores():
 
     data = response.json()
     games = data.get("events", [])
-    scores = []
+    in_progress = []
+    finished = []
 
     for game in games:
-        competitions = game.get("competitions", [])
-        if not competitions:
+        sets = game.get("sets", [])
+        if not sets:
             continue
 
-        comp = competitions[0]
+        comp = sets[0]
         competitors = comp.get("competitors", [])
         status = game.get("status", {}).get("type", {}).get("shortDetail", "")
 
@@ -29,12 +28,16 @@ def fetch_scores():
             score1 = competitors[0].get("score", "0")
             team2 = competitors[1]["team"]["abbreviation"]
             score2 = competitors[1].get("score", "0")
-            scores.append(f"{team1} {score1} - {team2} {score2} ({status})")
+            score_text = f"{team1} {score1} - {team2} {score2} ({status})"
 
-    if not scores:
-        scores.append("No MLB games today.")
+            # Separate in-progress and finished games
+            if "In Progress" in status:
+                in_progress.append(score_text)
+            else:
+                finished.append(score_text)
 
-    return scores
+    # Combine in-progress games first, followed by finished games
+    return in_progress + finished if in_progress else finished
 
 def display_scores():
     listbox.delete(0, tk.END)
@@ -61,3 +64,4 @@ refresh_button.pack(pady=5)
 
 display_scores()
 root.mainloop()
+
