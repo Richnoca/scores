@@ -24,9 +24,9 @@ def fetch_scores():
         status = game.get("status", {}).get("type", {}).get("shortDetail", "")
 
         if len(competitors) == 2:
-            team1 = competitors[0]["team"]["abbreviation"]
+            team1 = competitors[0]["team"]["abbreviation"] # this is the name of the home team in scores
             score1 = competitors[0].get("score", "0")
-            team2 = competitors[1]["team"]["abbreviation"]
+            team2 = competitors[1]["team"]["abbreviation"] # this is the name of the away team in scores
             score2 = competitors[1].get("score", "0")
             score_text = f"{team1} {score1} - {team2} {score2} ({status})"
 
