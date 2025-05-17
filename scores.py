@@ -11,7 +11,7 @@ def fetch_scores():
 
     data = response.json()
     games = data.get("events", [])
-    in_progress = []
+    in_progress = [] #this shows games in progress
     finished = [] #this shows finished games
 
     for game in games:
