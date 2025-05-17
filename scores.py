@@ -12,7 +12,7 @@ def fetch_scores():
     data = response.json()
     games = data.get("events", [])
     in_progress = []
-    finished = []
+    finished = [] #this shows finished games
 
     for game in games:
         competitions = game.get("competitions", [])
