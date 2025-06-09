@@ -62,6 +62,7 @@ listbox.config(yscrollcommand=scrollbar.set)
 refresh_button = ttk.Button(root, text="Refresh Scores", command=display_scores)
 refresh_button.pack(pady=5)
 
-display_scores()
-root.mainloop()
 
+if __name__ == "__main__":
+    display_scores()
+    root.mainloop()
